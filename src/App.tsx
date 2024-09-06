@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+import { GlobalStyles, darkTheme, lightTheme } from "./styles";
+import React, { useState } from "react";
+
+import { FormControlLabel } from "@mui/material";
+import { Provider } from "react-redux";
+import Switch from "@mui/material/Switch";
+import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-toastify";
+import { UsersListPage } from "./pages";
+import { store } from "./store";
+
+export const App: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDarkMode(event.target.checked);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Provider store={store}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <GlobalStyles />
 
-export default App;
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isDarkMode}
+              onChange={handleThemeChange}
+              color="primary"
+            />
+          }
+          label={isDarkMode ? "Dark Mode" : "Light Mode"}
+        />
+        <UsersListPage />
+        <ToastContainer />
+      </ThemeProvider>
+    </Provider>
+  );
+};
