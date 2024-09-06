@@ -23,7 +23,7 @@ const userSlice = createSlice({
       state.selectUserId = action.payload;
     },
     addUser(state, action: PayloadAction<User>) {
-        state.users.push(action.payload); // Add the new user to the users array
+        state.users.unshift(action.payload); // Add the new user to the users array
       },
     updateUser(state, action: PayloadAction<User>) {
         const updatedUser = action.payload;

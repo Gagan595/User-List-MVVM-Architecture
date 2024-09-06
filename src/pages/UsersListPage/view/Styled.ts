@@ -7,6 +7,14 @@ export const Container = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.body};
   color: ${(props) => props.theme.text};
+
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 `;
 
 export const Header = styled.div`
@@ -15,6 +23,11 @@ export const Header = styled.div`
   align-items: flex-start;
   margin-bottom: 20px;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const AddUserButton = styled.button`
@@ -24,9 +37,15 @@ export const AddUserButton = styled.button`
   border: none;
   border-radius: 5px;
   align-self: flex-end;
+
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover || props.theme.buttonBackground};
     cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    align-self: center;
+    width: 100%;
   }
 `;
 
@@ -46,14 +65,22 @@ export const UserContainer = styled.div`
   background-color: ${(props) => props.theme.body};
   color: ${(props) => props.theme.text};
   border-radius: 5px;
-  box-shadow: ${(props) => props.theme.boxShadow}
-`;
+  box-shadow: ${(props) => props.theme.boxShadow};
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
 
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   color: ${(props) => props.theme.text};
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
 export const EditUserButton = styled.button`
@@ -62,9 +89,14 @@ export const EditUserButton = styled.button`
   color: ${(props) => props.theme.buttonText};
   border: none;
   border-radius: 5px;
+
   &:hover {
     background-color: ${(props) => props.theme.buttonBackgroundHover || props.theme.buttonBackground};
     cursor: pointer;
   }
-`;
 
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 10px;
+  }
+`;
