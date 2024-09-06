@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# User Management App
 
-## Available Scripts
+This project is a user management application following the **MVVM** (Model-View-ViewModel) architecture. It is built using **React**, **TypeScript**, **Styled Components**, and **Redux** for state management. The app also supports light and dark themes with a centralized theming system.
 
-In the project directory, you can run:
+## Project Architecture
 
-### `npm start`
+### MVVM Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The application follows the MVVM pattern, keeping the business logic and view (UI) separate. Below is how the structure is organized:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Model**: Represents the data layer (in this case, managed by Redux).
+- **ViewModel (Logic)**: Handles application logic, such as managing state and actions.
+- **View**: Handles the presentation of the data and interacts with the ViewModel through context.
 
-### `npm test`
+For example, in the `AddUserModal`, you will find the following structure:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+  └── components/
+      └── AddUserModal/
+          ├── logic/
+          │    ├── AddUserModalContext.tsx
+          │    └── AddUserModalLogic.tsx
+          ├── view/
+          │    └── AddUserModalView.tsx
+          └── index.tsx
+```
 
-### `npm run build`
+### File Patterns and Their Uses
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Logic Folder (`/logic`)**:
+   - Contains logic-related files such as context providers, hooks, and state handling.
+   - **Example**: `AddUserModalLogic.tsx` handles user form submission and manages state for user inputs.
+   - **Context**: `AddUserModalContext.tsx` is responsible for passing the logic functions to the view using React Context.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **View Folder (`/view`)**:
+   - Contains the UI components that render data provided by the logic layer.
+   - **Example**: `AddUserModalView.tsx` contains form fields and the user interface for adding a user, receiving data and event handlers from the context.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Index.ts**:
+   - Barrel exports are used in here. 
 
-### `npm run eject`
+### Centralized Theming
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The app supports both **light** and **dark** themes using a centralized theming system powered by **Styled Components**. The theme is toggleable, and the entire app's styles adapt accordingly to the selected theme. The centralized theme object contains color definitions for both modes, ensuring consistent styling across all components.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### TypeScript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This project makes heavy use of **TypeScript** to provide type safety, improving code quality and reducing runtime errors. All logic, components, and context have defined types for props, state, and return values.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
+### Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **MVVM Architecture**: Separates logic (ViewModel) and presentation (View), making the code more maintainable and scalable.
+2. **Styled Components**: All styling is handled using styled components, with support for centralized theming (dark/light modes).
+3. **Redux for State Management**: Global state is managed using **Redux** for scalability and ease of data flow.
+4. **TypeScript Integration**: Provides type safety across components, logic, and context.
+5. **Toast Notifications**: **react-toastify** is used for success and error notifications when users are added or edited.
+---
