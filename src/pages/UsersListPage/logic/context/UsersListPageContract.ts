@@ -9,4 +9,7 @@ export interface UsersListPageContract {
   onClickEditButton: (userId: number) => void;
   isAddUserModalOpen: Boolean;
   isEditUserModalOpen: Boolean;
+  onClickUserDetail : (userId:number) => void;
+  userDetails: User | null;
+  isUserDetailsModalOpen: boolean;
 }

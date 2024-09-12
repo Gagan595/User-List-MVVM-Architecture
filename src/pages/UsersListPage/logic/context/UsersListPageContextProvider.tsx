@@ -13,11 +13,14 @@ export const UsersListPageContextProvider: React.FC<
   filteredUsers,
   isAddUserModalOpen,
   isEditUserModalOpen,
+  isUserDetailsModalOpen,
   onClickAddButton,
   onClickEditButton,
   searchTerm,
   setSearchTerm,
+  onClickUserDetail,
   users,
+  userDetails,
 }) => {
   return (
     <UsersListPageContext.Provider
@@ -25,11 +28,14 @@ export const UsersListPageContextProvider: React.FC<
         filteredUsers,
         isAddUserModalOpen,
         isEditUserModalOpen,
+        isUserDetailsModalOpen,
         onClickAddButton,
         onClickEditButton,
         searchTerm,
         setSearchTerm,
         users,
+        onClickUserDetail,
+        userDetails,
       }}
     >
       {children}

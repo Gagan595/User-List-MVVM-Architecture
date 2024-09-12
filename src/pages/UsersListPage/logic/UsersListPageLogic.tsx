@@ -6,6 +6,7 @@ import {
   setUsers,
   toggleAddUserModal,
   toggleEditUserModal,
+  toggleUserDetailsModal,
 } from "../../../store";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,12 +19,11 @@ export const UsersListPageLogic: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const dispatch = useDispatch();
-  const users = useSelector((state: RootState) => state.user.users);
+  const { users, selectUserId } = useSelector((state: RootState) => state.user);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const { isAddUserModalOpen, isEditUserModalOpen } = useSelector(
-    (state: RootState) => state.global
-  );
+  const { isAddUserModalOpen, isEditUserModalOpen, isUserDetailsModalOpen } =
+    useSelector((state: RootState) => state.global);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -44,6 +44,14 @@ export const UsersListPageLogic: React.FC<React.PropsWithChildren> = ({
     dispatch(toggleEditUserModal());
   };
 
+  const onClickUserDetail = (userId: number) => {
+    dispatch(selectUserById(userId));
+    dispatch(toggleUserDetailsModal());
+  };
+
+  const userDetail =
+    users.filter((user) => user.id === selectUserId)[0] ?? null;
+
   return (
     <UsersListPageContextProvider
       users={users}
@@ -54,6 +62,9 @@ export const UsersListPageLogic: React.FC<React.PropsWithChildren> = ({
       onClickEditButton={onClickEditButton}
       isAddUserModalOpen={isAddUserModalOpen}
       isEditUserModalOpen={isEditUserModalOpen}
+      onClickUserDetail={onClickUserDetail}
+      userDetails={userDetail}
+      isUserDetailsModalOpen={isUserDetailsModalOpen}
     >
       {children}
     </UsersListPageContextProvider>

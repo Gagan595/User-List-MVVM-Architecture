@@ -1,14 +1,15 @@
-// src/redux/slices/userSlice.ts
 import { createSlice } from '@reduxjs/toolkit';
 
 interface GlobalState {
   isAddUserModalOpen: boolean;
   isEditUserModalOpen: boolean;
+  isUserDetailsModalOpen: boolean;
 }
 
 const initialState: GlobalState = {
   isAddUserModalOpen: false,
   isEditUserModalOpen: false,
+  isUserDetailsModalOpen: false
 };
 
 const GlobalSlice = createSlice({
@@ -21,8 +22,11 @@ const GlobalSlice = createSlice({
     toggleEditUserModal: (state) => {
       state.isEditUserModalOpen = !state.isEditUserModalOpen;
     },
+    toggleUserDetailsModal: (state) => {
+      state.isUserDetailsModalOpen = !state.isUserDetailsModalOpen;
+    },
   },
 });
 
-export const { toggleAddUserModal, toggleEditUserModal } = GlobalSlice.actions;
+export const { toggleAddUserModal, toggleEditUserModal,toggleUserDetailsModal } = GlobalSlice.actions;
 export default GlobalSlice.reducer;

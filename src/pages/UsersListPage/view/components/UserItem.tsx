@@ -9,20 +9,23 @@ interface UserItemProps {
 }
 
 export const UserItem: React.FC<UserItemProps> = ({ user }) => {
-  const { onClickEditButton } = useUsersListPageLogic();
+  const { onClickEditButton, onClickUserDetail } = useUsersListPageLogic();
 
   return (
-    <>
-      <UserContainer>
-        <UserInfo>
-          <strong>{user.name}</strong>
-          <p>{user.phone}</p>
-          <p>{user.email}</p>
-        </UserInfo>
-        <EditUserButton onClick={() => onClickEditButton(user.id)}>
-          Edit User
-        </EditUserButton>
-      </UserContainer>
-    </>
+    <UserContainer onClick={() => onClickUserDetail(user.id)}>
+      <UserInfo>
+        <strong>{user.name}</strong>
+        <p>{user.phone}</p>
+        <p>{user.email}</p>
+      </UserInfo>
+      <EditUserButton
+        onClick={(e) => {
+          e.stopPropagation();
+          onClickEditButton(user.id);
+        }}
+      >
+        Edit User
+      </EditUserButton>
+    </UserContainer>
   );
 };
